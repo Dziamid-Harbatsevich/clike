@@ -19,8 +19,8 @@ class Git extends Config
 					$cmd = ['git add .',
 									'git commit -m "'.$this->comment_commit.'"',
 									'git push origin master',
-									$this->getAppParam('GIT_NAME'),
-									$this->getAppParam('GIT_PASS'),
+									'echo '.$this->getAppParam('GIT_NAME'),
+									'echo '.$this->getAppParam('GIT_PASS'),
 					];
 					$i = 0;
 					foreach ($cmd as $value) {
