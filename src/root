@@ -2,6 +2,5 @@
 include('help');
 require('core');
 require('config');
-include('io');
 include('server');
 include('git');

@@ -4,12 +4,29 @@
  */
 class Config extends Core
 {
+	private $app_param_all;
+	private $parameters;
 
-	public function getAppParam($app_param)
+	/**
+	 * Parameters available. Use this array to validate or to choose from
+	 * set of .env parameters.
+	 * @var [type]
+	 */
+	protected $relation_param = [
+		'--host' => 'GIT_HOST',
+		'--repo' => 'GIT_REPO',
+		'--name' => 'GIT_NAME',
+		'--pass' => 'GIT_PASS',
+		'--autopass' => 'GIT_AUTOPASS',
+		'--format' => 'GITFILE_FORMAT',
+		'--master' => 'GIT_MAIN_BRANCH',
+	];
+
+	protected function getAppParam($app_param)
 	{
-		$app_param_all = $this->readFileToArr();
+		$this->app_param_all = $this->readFileToArr();
 
-		foreach ($app_param_all as $key => $value)
+		foreach ($this->app_param_all as $key => $value)
 		{
 			if ($result = strstr($value, $app_param))
 			{
@@ -17,5 +34,42 @@ class Config extends Core
 			}
 		}
 		return false;
+	}
+
+	protected function setAppParam($arg_key, $arg_value = null)
+	{
+		if ($this->getAppParam($this->relation_param[$arg_key]) !== false)
+		{
+			if ($arg_value === null) {
+				$this->eraseDataUException(); 		// challenging message to user
+			}
+			$app_param = preg_grep('/^'.$this->relation_param[$arg_key].'*/', $this->app_param_all);
+			//Remove dublicated parameters
+			if (count($app_param) > 1) {
+		 		$app_param = array_shift($app_param);
+		 	}
+		 	$position = key($app_param);
+		 	$app_param_new = strstr(current($app_param), '=', true).'='.$arg_value;
+
+		 	$this->app_param_all[$position] = $app_param_new;
+			return $this->saveAppParameters() ? true : false;
+		}
+	}
+
+	protected function getValidAppParams($arg_key, $arg_value = null)
+	{
+		return $this->parameters = $this->validateParam($this->prepToValidate([$arg_key, $arg_value]), array_keys($this->relation_param));
+	}
+
+	protected function saveAppParameters()
+	{
+		$file_data = implode("\n", $this->app_param_all);
+		$fl = fopen('.env', 'a');
+		if (!file_put_contents('.env', print_r($file_data, true))) {
+			fclose($fl);
+			return false;
+		}
+		fclose($fl);
+		return true;
 	}
 }

@@ -1,8 +1,9 @@
 <?php
+require('io');
 /**
  * Core Class for universal and app basic functions
  */
-class Core
+class Core extends IO
 {
 	/**
 	 * Configuration settings credentials file
@@ -17,6 +18,21 @@ class Core
 	protected function readFileToArr()
 	{
 		return file($this->env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+	}
+
+	protected static function validateParam(array $validated, array $rules)
+	{
+		return array_intersect($validated, $rules);
+	}
+
+	/**
+	 * Delete null, "" and false from array.
+	 * @param  array  $data [description]
+	 * @return [type]       [description]
+	 */
+	public function prepToValidate(array $data)
+	{
+		return array_filter($data, 'strlen');
 	}
 
 	/**

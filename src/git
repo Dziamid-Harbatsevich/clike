@@ -16,27 +16,29 @@ class Git extends Config
 	 */
 	function __construct(array $argv)
 	{
-		$param_1 = ltrim(strstr($argv[1], ':'), ':');
+		$arg_1 = ltrim(strstr($argv[1], ':'), ':');
 
-		switch ($param_1) {
+		switch ($arg_1) {
 			case 'commit':
-				$if_comment = array_search('-c', $argv, true);
+				$if_comment = array_search('-m', $argv, true);
 				$this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
 				echo "commiting..\n";
 
 				$this->commitPrepare();
 				break;
 			case 'config':
-				// clike git:config --pass
+				$if_config = array_search('git:config', $argv, true);
+				$arg_1 = $argv[++$if_config];
+				$arg_2 = $argv[++$if_config] ?? null;
+				if ($validated = $this->getValidAppParams($arg_1, $arg_2))
+				{
+					$this->setAppParam($validated[0], $arg_2);
+				}
 				break;
 
 			default:
-				echo "Help!";
+				echo "Help!"; // !!!!! !! !
 				break;
-		}
-		if ($param_1 === 'commit')
-		{
-
 		}
 	}
 

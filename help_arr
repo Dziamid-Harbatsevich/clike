@@ -16,10 +16,10 @@ return [
 		],
 		"git" => [
 			":commit" => [
-				"-c",
+				"-m",
 			],
 			":config" => [
-				"--pass",
+				"--autopass",
 			],
 		],
 		"storage" => [

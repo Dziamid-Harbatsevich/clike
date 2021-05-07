@@ -45,11 +45,15 @@ Default master branch named as "master". You can choose your own branch and gitf
 Examples:
 * Commit changes and push
 
-clike git:commit [-c "Commit text.."]
+clike git:commit [-m "Commit text.."]
 
 * Set CLIke Git Control to use credentials for auto-authentication
 
-clike git:config --pass
+clike git:config --autopass
+
+* Reject CLIke Git Control to use credentials for auto-authentication
+
+clike git:config --autopass (true|false)
 
 
 

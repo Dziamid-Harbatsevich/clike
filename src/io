@@ -5,17 +5,33 @@
 class IO
 {
 
-	function __construct()
+	protected function eraseDataUException()
+	{
+		echo "This will leave configuration value empty? Delete this setting parameter ( yes|no ): ";
+		$handle = fopen ("php://stdin","r");
+		$line = fgets($handle);
+		if(trim($line) !== 'yes'){
+	    	echo "ABORTING!\n";
+	    exit;
+		}
+		fclose($handle);
+		echo "\n";
+		echo "Ok, continuing...\n";
+		return true;
+	}
+
+	protected function commonUException()
 	{
 		echo "Are you sure you want to do this?  Type 'yes' to continue: ";
 		$handle = fopen ("php://stdin","r");
 		$line = fgets($handle);
 		if(trim($line) !== 'yes'){
-	    echo "ABORTING!\n";
+	    	echo "ABORTING!\n";
 	    exit;
 		}
 		fclose($handle);
 		echo "\n";
-		echo "Thank you, continuing...\n";
+		echo "Ok, continuing...\n";
+		return true;
 	}
 }
