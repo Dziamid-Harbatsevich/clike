@@ -21,20 +21,25 @@ class Git extends Config
 				'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all',
 			];
 
-			$i = 0;
-			foreach ($cmd as $value) {
-				$this->execInBackground($value);
-				$i++;
-				if ($i > 1) {
-					sleep(5);
-				} else {
-					sleep(3);
-				}
-			}
+			$this->execWithDelay($cmd, count($cmd), [3, 5]);
 		}
 		else
 		{
 			return false;
+		}
+	}
+
+	private function execWithDelay(array $cmd, int $count_cmd, array $delay)
+	{
+		$i = 1;
+		foreach ($cmd as $value) {
+			$this->execInBackground($value);
+			$i++;
+			if ($i < $count_cmd) {
+				sleep($delay[0]);
+			} else {
+				sleep($delay[1]);
+			}
 		}
 	}
 }
