@@ -2,8 +2,29 @@
 return [
 	"clike" => [
 		"config" => [
-			"source",
-			"target"
+			":set",
+			":get",
+		],
+		"server" => [
+			":start",
+			":stop",
+			":reload",
+			":restart",
+			"__parameters" => [
+				"--min",
+			],
+		],
+		"git" => [
+			":commit" => [
+				"-c",
+			],
+			":config" => [
+				"--pass",
+			],
+		],
+		"storage" => [
+			":source",
+			":target",
 		],
 	],
 ];

@@ -49,6 +49,6 @@ clike git:commit [-c "Commit text.."]
 
 * Set CLIke Git Control to use credentials for auto-authentication
 
-clike git:config -pass
+clike git:config --pass
 
 
