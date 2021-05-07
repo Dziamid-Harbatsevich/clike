@@ -34,7 +34,7 @@ class Git extends Config
 					git commit -m "'.$this->comment_commit.'" &&
 					git push '.$this->getAppParam('GITFILE_FORMAT').' '.$this->getAppParam('GIT_MAIN_BRANCH')
 				;
-				$this->execWithDelay($cmd, 2);
+				$this->execWithDelay($cmd, 10);
 			}
 		}
 	}
