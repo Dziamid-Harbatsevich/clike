@@ -4,15 +4,15 @@
 * Tar Backup and Copy to Storage
 
 ## COMPATABILITY ##
-Developed and tested on Ubuntu 20.04 / PHP 8.0.5 / Nginx 1.18.0 / MySQL 8.0.23
+Developed and tested on Ubuntu 20.04(wsl) / PHP 8.0.5 / Nginx 1.18.0 / MySQL 8.0.23
 
 ## INSTALLATION ##
 
 ### Clone app ###
-In some [app_folder] defined by you. Just check if you have an appropriate rights to use this folder.
+In some \<app_folder\> defined by you. Just check if you have an appropriate rights to use this folder.
 
 ### Create an alias for "clike" command in ~/.bash_aliases: ###
-alias clike='php ~/[app_folder]/clike'
+alias clike='php ~/\<app_folder\>/clike'
 
 ### Set PHP version running ###
 Check files: "webserver/devserv", "webserver/devserv-min"
