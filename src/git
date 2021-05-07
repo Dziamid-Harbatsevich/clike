@@ -18,11 +18,11 @@ class Git extends Config
 
 			if ($this->getAppParam('GIT_AUTOPASS') == 'true')
 			{
-				$cmd = ['git add .',
-					'git commit -m "'.$this->comment_commit.'"',
-					'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all',
-				];
-				$this->execWithDelay($cmd, count($cmd), [3, 5]);
+				$cmd = 'git add . |
+					git commit -m "'.$this->comment_commit.'" |
+					git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all'
+				;
+				$this->execWithDelay($cmd, 3);
 			}
 			else
 			{
@@ -39,7 +39,13 @@ class Git extends Config
 		}
 	}
 
-	private function execWithDelay(array $cmd, int $count_cmd, array $delay)
+	private function execWithDelay(string $cmd, int $delay)
+	{
+			$this->execInBackground($cmd);
+			sleep($delay[0]);
+	}
+
+	private function execWithDelayAsync(array $cmd, int $count_cmd, array $delay)
 	{
 		$i = 1;
 		foreach ($cmd as $value) {
