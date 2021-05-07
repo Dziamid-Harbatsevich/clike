@@ -38,4 +38,4 @@ NOTE: The passwords should be saved encoded according to ASCII Codes Table (% + 
 Default master branch named as "master". You can choose your own branch and gitfile format ("origin" is conventional) while pushing new commits.
 
 Examples:
-* clike git:commit [-c]
+* clike git:commit [-c] \("Commit text.."\)

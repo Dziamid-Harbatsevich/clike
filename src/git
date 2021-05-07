@@ -30,7 +30,7 @@ class Git extends Config
 					'git commit -m "'.$this->comment_commit.'"',
 					'git push '.$this->getAppParam('GITFILE_FORMAT').' '.$this->getAppParam('GIT_MAIN_BRANCH').'',
 				];
-				$this->execWithDelay($cmd, count($cmd), [3, 10]);
+				$this->execWithDelay($cmd, count($cmd), [3, 7]);
 			}
 		}
 		else
