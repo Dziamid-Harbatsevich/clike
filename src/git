@@ -16,14 +16,11 @@ class Git extends Config
 					$this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
 					echo "commiting..\n";
 
-// echo 'git push "https://Dziamid-Harbatsevich:ok48mc3%2A3lR%23%25%2C29@github.com/clike.git" --all';
-
-
 					$cmd = ['git add .',
 									'git commit -m "'.$this->comment_commit.'"',
 									'git push origin master',
 									'git push https://Dziamid-Harbatsevich:ok48mc3%2A3lR%23%25%2C29@github.com/clike.git --all',
-									// 'git push "https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@github.com/clike.git" --all',
+									'git push "https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@github.com/'.$this->getAppParam('GIT_NAME').'/clike.git" --all',
 					];
 					$i = 0;
 					foreach ($cmd as $value) {

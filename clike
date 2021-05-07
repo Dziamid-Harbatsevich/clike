@@ -44,7 +44,7 @@ echo "\n".$CSI."36;40m" . "--- CLIKE CLI received following parameters:" . $CSI 
 
 for ($i=1; $i < count($argv); $i++)
 {
-	echo $argv[$i];
+	echo $argv[$i].' / ';
 }
 echo "\n\n";
 
