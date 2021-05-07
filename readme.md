@@ -52,3 +52,14 @@ clike git:commit [-c "Commit text.."]
 clike git:config --pass
 
 
+
+
+
+
+## Credits
+
+- All Contributors
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
