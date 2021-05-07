@@ -24,4 +24,9 @@ clike server:(start|stop|reload... "common parameters for Nginx, PHP, Mysql acco
 
 Examples:
 * clike server:start
-* clike server:reload --min
+* clike server:reload [--min]
+
+# Git Control #
+
+Examples:
+* clike git:commit [-c]

@@ -4,18 +4,33 @@
  */
 class Git extends Config
 {
+		private $comment_commit = 'clike-auto-commit';
 
 		function __construct($argv)
 		{
 				$param_1 = ltrim(strstr($argv[1], ':'), ':');
-				// $serv_min_arg = array_search('--min', $argv, true);
+				$if_comment = array_search('-c', $argv, true);
 
 				if ($param_1 === 'commit')
 				{
+					$this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
 					echo "commiting..\n";
-					exec('git add .');
-					// $cmd = 'sh '.pathinfo($argv[0], PATHINFO_DIRNAME).'/webserver/devserv ' . $param_1;
-					// $this->execInBackground($cmd);
+
+					$cmd = ['git add .',
+									'git commit -m "'.$this->comment_commit.'"',
+									'git push origin master',
+									$this->getAppParam('GIT_NAME'),
+									$this->getAppParam('GIT_PASS'),
+					];
+					$i = 0;
+					foreach ($cmd as $value) {
+						if ($i > 2) {
+							sleep(2);
+						}
+						$this->execInBackground($value);
+						sleep(2);
+						$i++;
+					}
 				}
 				// elseif ($param_1 !== null)
 				// {
@@ -26,8 +41,5 @@ class Git extends Config
 				{
 					return false;
 				}
-
-// $Config = new Config;
-// $git_name = $Config->getAppParam('GIT_NAME'));
 		}
 }
