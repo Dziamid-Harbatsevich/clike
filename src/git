@@ -4,42 +4,45 @@
  */
 class Git extends Config
 {
-		private $comment_commit = 'clike-auto-commit';
+	private $comment_commit = 'clike-auto-commit';
 
-		function __construct($argv)
+	function __construct($argv)
+	{
+		$param_1 = ltrim(strstr($argv[1], ':'), ':');
+		$if_comment = array_search('-c', $argv, true);
+
+		if ($param_1 === 'commit')
 		{
-				$param_1 = ltrim(strstr($argv[1], ':'), ':');
-				$if_comment = array_search('-c', $argv, true);
+			$this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
+			echo "commiting..\n";
 
-				if ($param_1 === 'commit')
-				{
-					$this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
-					echo "commiting..\n";
+			$cmd = ['git add .',
+				'git commit -m "'.$this->comment_commit.'"',
+				// 'git push origin master',
+				// 'git push https://Dziamid-Harbatsevich:ok48mc3%2A3lR%23%25%2C29@github.com/clike.git --all',
+				'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@github.com/'.$this->getAppParam('GIT_NAME').'/clike.git --all',
+			];
 
-					$cmd = ['git add .',
-									'git commit -m "'.$this->comment_commit.'"',
-									// 'git push origin master',
-									// 'git push https://Dziamid-Harbatsevich:ok48mc3%2A3lR%23%25%2C29@github.com/clike.git --all',
-									'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@github.com/'.$this->getAppParam('GIT_NAME').'/clike.git --all',
-					];
-					$i = 0;
-					foreach ($cmd as $value) {
-						if ($i > 2) {
-							sleep(2);
-						}
-						$this->execInBackground($value);
-						sleep(2);
-						$i++;
-					}
+	// echo $cmd[2];
+
+			$i = 0;
+			foreach ($cmd as $value) {
+				if ($i > 2) {
+					sleep(2);
 				}
-				// elseif ($param_1 !== null)
-				// {
-				// 	// $cmd = 'sh '.pathinfo($argv[0], PATHINFO_DIRNAME).'/webserver/devserv-min ' . $param_1;
-				// 	// $this->execInBackground($cmd);
-				// }
-				else
-				{
-					return false;
-				}
+				$this->execInBackground($value);
+				sleep(2);
+				$i++;
+			}
 		}
+		// elseif ($param_1 !== null)
+		// {
+		// 	// $cmd = 'sh '.pathinfo($argv[0], PATHINFO_DIRNAME).'/webserver/devserv-min ' . $param_1;
+		// 	// $this->execInBackground($cmd);
+		// }
+		else
+		{
+			return false;
+		}
+	}
 }
