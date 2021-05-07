@@ -18,7 +18,7 @@ class Git extends Config
 
 			$cmd = ['git add .',
 				'git commit -m "'.$this->comment_commit.'"',
-				'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@github.com/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all',
+				'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all',
 			];
 
 			$i = 0;
