@@ -18,12 +18,8 @@ class Git extends Config
 
 			$cmd = ['git add .',
 				'git commit -m "'.$this->comment_commit.'"',
-				// 'git push origin master',
-				// 'git push https://Dziamid-Harbatsevich:ok48mc3%2A3lR%23%25%2C29@github.com/clike.git --all',
-				'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@github.com/'.$this->getAppParam('GIT_NAME').'/clike.git --all',
+				'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@github.com/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all',
 			];
-
-	// echo $cmd[2];
 
 			$i = 0;
 			foreach ($cmd as $value) {
@@ -35,11 +31,6 @@ class Git extends Config
 				$i++;
 			}
 		}
-		// elseif ($param_1 !== null)
-		// {
-		// 	// $cmd = 'sh '.pathinfo($argv[0], PATHINFO_DIRNAME).'/webserver/devserv-min ' . $param_1;
-		// 	// $this->execInBackground($cmd);
-		// }
 		else
 		{
 			return false;

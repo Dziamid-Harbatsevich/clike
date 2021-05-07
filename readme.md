@@ -28,5 +28,8 @@ Examples:
 
 # Git Control #
 
+NOTE: The passwords showld be saved encoded according to ASCII Codes Table (% + Hex code of the character, "%26" = "&")
+
+
 Examples:
 * clike git:commit [-c]
