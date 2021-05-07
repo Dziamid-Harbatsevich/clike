@@ -1,0 +1,29 @@
+<?php
+include('core');
+/**
+ * Web Server Management
+ */
+class Server extends Core
+{
+
+		function __construct($argv)
+		{
+				$param_1 = ltrim(strstr($argv[1], ':'), ':');
+				$serv_min_arg = array_search('--min', $argv, true);
+
+				if ($param_1 !== null && !$serv_min_arg)
+				{
+					$cmd = 'sh '.pathinfo($argv[0], PATHINFO_DIRNAME).'/webserver/devserv ' . $param_1;
+					$this->execInBackground($cmd);
+				}
+				elseif ($param_1 !== null && $serv_min_arg)
+				{
+					$cmd = 'sh '.pathinfo($argv[0], PATHINFO_DIRNAME).'/webserver/devserv-min ' . $param_1;
+					$this->execInBackground($cmd);
+				}
+				else
+				{
+					return false;
+				}
+		}
+}

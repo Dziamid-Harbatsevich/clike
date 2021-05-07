@@ -1,0 +1,64 @@
+#!/usr/bin/env php
+<?php
+/**
+ * ## Server Controller. Commands:
+ * # Load nginx/php-fpm/mysql
+ * serv [(start|stop|reload... - any parameters that nginx/php-fpm/mysql accept)]
+ * # Load nginx/php-fpm
+ * serv-min [(start|stop|reload... - any parameters that nginx/php-fpm accept)]
+ */
+/**
+ * NOTES
+ */
+/*
+Black: \u001b[30m.
+Red: \u001b[31m.
+Green: \u001b[32m.
+Yellow: \u001b[33m.
+Blue: \u001b[34m.
+Magenta: \u001b[35m.
+Cyan: \u001b[36m.
+White: \u001b[37m.
+ */
+
+include('src/help');
+include('src/io');
+include('src/server');
+/**
+ * ANSI escape code
+ * @var string
+ */
+$CSI = "\x1B[";
+
+/**
+ * HELP
+ */
+new Help($argv);
+if (!isset($argv[1])) {
+	new Help($argv += [1 => '-h']);
+}
+
+/**
+ * Configuration
+ */
+
+echo "\n".$CSI."36;40m" . "--- CLIKE CLI received following parameters:" . $CSI . "0m". "\n";
+
+for ($i=1; $i < count($argv); $i++)
+{
+	echo $argv[$i];
+}
+echo "\n\n";
+
+switch (strstr($argv[1], ':', true)?: $argv[1]) {
+	case 'config':
+		# code...
+		break;
+	case 'server':
+		new Server($argv) ?: new Help($argv += [5 => '-h']);
+		break;
+
+	default:
+		// $argv[1] == null
+		break;
+}

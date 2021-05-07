@@ -1,0 +1,22 @@
+<?php
+/**
+ * Core Class for universal and app basic functions
+ */
+class Core
+{
+
+	/**
+	 * Process execution in background via CLI
+	 * @param  string $cmd command to execute
+	 * @return nothing
+	 */
+		protected static function execInBackground(string $cmd)
+		{
+			  if (substr(php_uname(), 0, 7) == "Windows"){
+			      pclose(popen("start /B ". $cmd, "r"));
+			  }
+			  else {
+			      exec($cmd . " > /dev/null &");
+			  }
+		}
+}

@@ -1,0 +1,29 @@
+<?php
+/**
+ * HELP for CLIKE APP
+ */
+class Help
+{
+
+		function __construct($argv)
+		{
+				if ($help_topic = array_search('--help', $argv, true) || $help_topic = array_search('-h', $argv, true))
+				{
+				/**
+				 * ANSI escape code
+				 * @var string
+				 */
+					$CSI = "\x1B[";
+
+					echo "\n". $CSI."32;40m" . "--------------------------------------------------------------" . $CSI . "2m" ."\n";
+					echo " -- HELP for \"". $argv[$help_topic-1]. "\" --" ."\n\n";
+					echo "Example commands: clike server:start | \nclike config:target | clike config --help" ."\n";
+					echo "--------------------------------------------------------------" ."\n\n";
+
+					$help = include('./help_arr');
+					print_r($help);
+
+					exit;
+				}
+		}
+}

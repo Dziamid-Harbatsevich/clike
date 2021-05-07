@@ -1,0 +1,9 @@
+<?php
+return [
+	"clike" => [
+		"config" => [
+			"source",
+			"target"
+		],
+	],
+];
