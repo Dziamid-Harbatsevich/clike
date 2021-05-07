@@ -6,6 +6,10 @@ class Git extends Config
 {
 	private $comment_commit = 'clike-auto-commit';
 
+	/**
+	 * [__construct description]
+	 * @param [type] $argv [description]
+	 */
 	function __construct($argv)
 	{
 		$param_1 = ltrim(strstr($argv[1], ':'), ':');
@@ -22,29 +26,35 @@ class Git extends Config
 					git commit -m "'.$this->comment_commit.'" &&
 					git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all'
 				;
-				$this->execWithDelay($cmd, 2);
+				$this->execWithDelay($cmd, 5);
 			}
 			else
 			{
-				$cmd = ['git add .',
-					'git commit -m "'.$this->comment_commit.'"',
-					'git push '.$this->getAppParam('GITFILE_FORMAT').' '.$this->getAppParam('GIT_MAIN_BRANCH').'',
-				];
-				$this->execWithDelay($cmd, count($cmd), [3, 7]);
+				$cmd = 'git add . &&
+					git commit -m "'.$this->comment_commit.'" &&
+					git push '.$this->getAppParam('GITFILE_FORMAT').' '.$this->getAppParam('GIT_MAIN_BRANCH')
+				;
+				$this->execWithDelay($cmd, 2);
 			}
-		}
-		else
-		{
-			return false;
 		}
 	}
 
+	/**
+	 * Execute CLI commands in background.
+	 * @param  string $cmd   	Commands chain
+	 * @param  int    $delay 	Delay after executino (in seconds)
+	 * @return null        		[description]
+	 */
 	private function execWithDelay(string $cmd, int $delay)
 	{
 			$this->execInBackground($cmd);
 			sleep($delay);
+			return;
 	}
 
+	/**
+	 * !!! Not used yet.
+	 */
 	private function execWithDelayAsync(array $cmd, int $count_cmd, array $delay)
 	{
 		$i = 1;

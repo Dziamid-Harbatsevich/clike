@@ -5,17 +5,17 @@
 class Config extends Core
 {
 
-		public function getAppParam($app_param)
-		{
-			$app_param_all = $this->readFileToArr();
+	public function getAppParam($app_param)
+	{
+		$app_param_all = $this->readFileToArr();
 
-			foreach ($app_param_all as $key => $value)
+		foreach ($app_param_all as $key => $value)
+		{
+			if ($result = strstr($value, $app_param))
 			{
-				if ($result = strstr($value, $app_param))
-				{
-					return trim(ltrim(strstr($result, '='), '='));
-				}
+				return trim(ltrim(strstr($result, '='), '='));
 			}
-			return false;
 		}
+		return false;
+	}
 }
