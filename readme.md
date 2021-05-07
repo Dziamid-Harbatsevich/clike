@@ -28,6 +28,8 @@ Examples:
 
 # Git Control #
 
+Configure connection to the GitHub repository in .env file.
+
 NOTE: The passwords should be saved encoded according to ASCII Codes Table (% + Hex code of the character, "%26" = "&").
 [ASCII Table](https://ascii.cl/)
 
