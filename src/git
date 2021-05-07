@@ -18,11 +18,11 @@ class Git extends Config
 
 			if ($this->getAppParam('GIT_AUTOPASS') == 'true')
 			{
-				$cmd = 'git add . |
-					git commit -m "'.$this->comment_commit.'" |
+				$cmd = 'git add . &&
+					git commit -m "'.$this->comment_commit.'" &&
 					git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all'
 				;
-				$this->execWithDelay($cmd, 3);
+				$this->execWithDelay($cmd, 2);
 			}
 			else
 			{
