@@ -30,9 +30,12 @@ Examples:
 
 Configure connection to the GitHub repository in .env file.
 "GIT_HOST" parameter equals a host + full path to the git repository root.
+If you wish to get total automatization than set "GIT_AUTOPASS" to true and set password. Please, consider notification below as the Git credentials send via URL-HTTPS.
 
 NOTE: The passwords should be saved encoded according to ASCII Codes Table (% + Hex code of the character, "%26" = "&").
 [ASCII Table](https://ascii.cl/)
+
+Default master branch named as "master". You can choose your own branch while pushing new commits.
 
 Examples:
 * clike git:commit [-c]
