@@ -4,13 +4,17 @@
  */
 class Git extends Config
 {
+	/**
+	 * Default comment for git commits.
+	 * @var string
+	 */
 	private $comment_commit = 'clike-auto-commit';
 
 	/**
-	 * [__construct description]
-	 * @param [type] $argv [description]
+	 * Parse CLI parameters.
+	 * @param array $argv CLIke CLI params array
 	 */
-	function __construct($argv)
+	function __construct(array $argv)
 	{
 		$param_1 = ltrim(strstr($argv[1], ':'), ':');
 		$if_comment = array_search('-c', $argv, true);
@@ -67,5 +71,6 @@ class Git extends Config
 				sleep($delay[1]);
 			}
 		}
+		return;
 	}
 }
