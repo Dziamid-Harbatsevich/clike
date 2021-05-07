@@ -23,8 +23,10 @@ class Git extends Config
 
 			$i = 0;
 			foreach ($cmd as $value) {
+				if ($i > 1) {
+					sleep(2);
+				} else { sleep(4); }
 				$this->execInBackground($value);
-				sleep(4);
 				$i++;
 			}
 		}
