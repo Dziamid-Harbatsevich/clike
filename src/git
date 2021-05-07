@@ -16,11 +16,20 @@ class Git extends Config
 			$this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
 			echo "commiting..\n";
 
-			$cmd = ['git add .',
-				'git commit -m "'.$this->comment_commit.'"',
-				'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all',
-			];
-
+			if ($this->getAppParam('GIT_AUTOPASS') == 'true')
+			{
+				$cmd = ['git add .',
+					'git commit -m "'.$this->comment_commit.'"',
+					'git push https://'.$this->getAppParam('GIT_NAME').':'.$this->getAppParam('GIT_PASS').'@'.$this->getAppParam('GIT_HOST').'/'.$this->getAppParam('GIT_NAME').'/'.$this->getAppParam('GIT_REPO').'.git --all',
+				];
+			}
+			else
+			{
+				$cmd = ['git add .',
+					'git commit -m "'.$this->comment_commit.'"',
+					'git push '.$this->getAppParam('GITFILE_FORMAT').' '.$this->getAppParam('GIT_MAIN_BRANCH').'',
+				];
+			}
 			$this->execWithDelay($cmd, count($cmd), [3, 5]);
 		}
 		else

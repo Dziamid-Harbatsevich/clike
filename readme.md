@@ -35,7 +35,7 @@ If you wish to get total automatization than set "GIT_AUTOPASS" to true and set 
 NOTE: The passwords should be saved encoded according to ASCII Codes Table (% + Hex code of the character, "%26" = "&").
 [ASCII Table](https://ascii.cl/)
 
-Default master branch named as "master". You can choose your own branch while pushing new commits.
+Default master branch named as "master". You can choose your own branch and gitfile format ("origin" is conventional) while pushing new commits.
 
 Examples:
 * clike git:commit [-c]
