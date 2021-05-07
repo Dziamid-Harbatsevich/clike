@@ -42,7 +42,7 @@ class Git extends Config
 	private function execWithDelay(string $cmd, int $delay)
 	{
 			$this->execInBackground($cmd);
-			sleep($delay[0]);
+			sleep($delay);
 	}
 
 	private function execWithDelayAsync(array $cmd, int $count_cmd, array $delay)
