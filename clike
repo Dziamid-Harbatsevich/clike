@@ -21,9 +21,7 @@ Cyan: \u001b[36m.
 White: \u001b[37m.
  */
 
-include('src/help');
-include('src/io');
-include('src/server');
+require('src/root');
 /**
  * ANSI escape code
  * @var string
@@ -55,7 +53,10 @@ switch (strstr($argv[1], ':', true)?: $argv[1]) {
 		# code...
 		break;
 	case 'server':
-		new Server($argv) ?: new Help($argv += [5 => '-h']);
+		new Server($argv)?: new Help($argv += [5 => '-h']);
+		break;
+	case 'git':
+		new Git($argv)?: new Help($argv += [5 => '-h']);
 		break;
 
 	default:

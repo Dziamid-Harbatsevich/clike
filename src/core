@@ -4,6 +4,20 @@
  */
 class Core
 {
+	/**
+	 * Configuration settings credentials file
+	 * @var string
+	 */
+		protected $env_file = '.env';
+
+	/**
+	 * [readFileToArr description]
+	 * @return [type]       [description]
+	 */
+		protected function readFileToArr()
+		{
+				return file($this->env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+		}
 
 	/**
 	 * Process execution in background via CLI
