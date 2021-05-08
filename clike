@@ -37,19 +37,19 @@ echo "\n\n";
 
 switch (strstr($argv[1], ':', true)?: $argv[1]) {
 	case 'config':
-		new Help($argv);
+		new Help($argv += [5 => '-h']);
 		break;
 	case 'server':
-		new Server($argv)?: new Help($argv);
+		new Server($argv)?: new Help($argv += [5 => '-h']);
 		break;
 	case 'git':
-		new Git($argv)?: new Help($argv);
+		new Git($argv)?: new Help($argv += [5 => '-h']);
 		break;
 	case 'storage':
-		new Help($argv);
+		new Help($argv += [5 => '-h']);
 		break;
 
 	default:
-		new Help($argv);
+		new Help($argv += [5 => '-h']);
 		break;
 }
