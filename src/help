@@ -7,7 +7,7 @@ class Help
 
 	function __construct($argv)
 	{
-		print_r($argv);
+		print_r(count($argv));
 		$help_topic = array_search('--help', $argv, true)?: array_search('-h', $argv, true);
 		if (!empty($help_topic))
 		{
