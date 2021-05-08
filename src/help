@@ -4,30 +4,29 @@
  */
 class Help
 {
+	public $help_topic_default = 'clike';
 
 	function __construct($argv)
 	{
-		print_r(count($argv));
 		$help_topic = array_search('--help', $argv, true)?: array_search('-h', $argv, true);
-		if (!empty($help_topic))
+		if ($help_topic)
 		{
-			if (!$help_topic && count($argv) >= 2)
-			{
-				$help_topic = strstr($argv[1], ':', true)?: $argv[1];
-			}
-			elseif (count($argv) == 1)
-			{
-				$help_topic = pathinfo($argv[0], PATHINFO_BASENAME);
-			}
-			else
+			$help = include('./docs/help_arr');
+
+			if (count($argv) > 2)
 			{
 				$help_topic = strstr($argv[$help_topic-1], ':', true)?: $argv[1];
 			}
+			elseif (count($argv) == 2)
+			{
+				$help_topic = pathinfo($argv[0], PATHINFO_BASENAME);
+			}
+			// else {
+			// 	// $help_topic = strstr($argv[$help_topic-1], ':', true)?: $argv[1];
+			// 	echo strstr($argv[$help_topic-1], ':', true)?: $argv[1]; exit;
 
-			$help = include('./docs/help_arr');
-			// if searching param for help does not exist
-			// if (!array_search($help_topic, $help['clike'], true))
-			// { exit; }
+			// 	// $help_topic = ! ? $this->help_topic_default : $help_topic; 	// if searching param for help exists
+			// }
 
 			/**
 			 * ANSI escape code
@@ -35,21 +34,26 @@ class Help
 			 */
 			$CSI = "\x1B[";
 
-			echo "\n". $CSI."32;40m" . "--------------------------------------------------------------" . $CSI . "2m" ."\n";
-			echo " -- HELP for \"". $help_topic. "\" --" ."\n\n";
-			echo "Example commands: clike server:start | \nclike config:target | clike config --help" ."\n";
-			echo "--------------------------------------------------------------" ."\n\n";
+			$help_header = "\n". $CSI."32;40m" . "--------------------------------------------------------------" . $CSI . "2m" ."\n";
+			$help_header .= " -- HELP for \"". $help_topic. "\" --" ."\n\n";
+			$help_header .= "Example commands: clike server:start | \nclike config:target | clike config --help" ."\n";
+			$help_header .= "--------------------------------------------------------------" ."\n\n";
 
-			if ($help_topic !== 'clike')
+			if ($help_topic !== $this->help_topic_default)
 			{
-				print_r($help['clike'][$help_topic]);
+				if (!isset($help[$this->help_topic_default][$help_topic])) {
+					exit;
+				}
+				echo $help_header;
+				print_r($help[$this->help_topic_default][$help_topic]);
+
 			}
 			else
 			{
-				print_r($help[$help_topic]);
+				echo $help_header;
+				print_r($help[$this->help_topic_default]);
 			}
-
-			exit;
 		}
+		exit;
 	}
 }

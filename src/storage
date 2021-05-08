@@ -41,9 +41,8 @@ class Storage extends Config
 				break;
 
 			default:
-				new Help(array_push($argv,'-h'));
+				callHelp::callHelp($argv);
 				break;
 		}
-		callHelp::callHelp($argv);
 	}
 }
