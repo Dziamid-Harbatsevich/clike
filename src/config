@@ -19,7 +19,7 @@ class Config extends Core
 		'--pass' => 'GIT_PASS',
 		'--autopass' => 'GIT_AUTOPASS',
 		'--format' => 'GITFILE_FORMAT',
-		'--master' => 'GIT_MAIN_BRANCH',
+		'--branch' => 'GIT_MAIN_BRANCH',
 	];
 
 	protected function getAppParam($app_param)
