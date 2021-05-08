@@ -11,25 +11,40 @@ class Git extends Config
 	private $comment_commit = 'clike-auto-commit';
 
 	/**
+	 * Parameters available. Use this array to validate or to choose from
+	 * set of .env parameters.
+	 * @var [type]
+	 */
+	protected $git_param = [
+		'--host' => 'GIT_HOST',
+		'--repo' => 'GIT_REPO',
+		'--name' => 'GIT_NAME',
+		'--pass' => 'GIT_PASS',
+		'--autopass' => 'GIT_AUTOPASS',
+		'--format' => 'GITFILE_FORMAT',
+		'--branch' => 'GIT_MAIN_BRANCH',
+	];
+
+	/**
 	 * Parse CLI parameters.
 	 * @param array $argv CLIke CLI params array
 	 */
 	function __construct(array $argv)
 	{
 		$arg_1 = ltrim(strstr($argv[1], ':'), ':');
-
 		switch ($arg_1) {
 			case 'commit':
-				$if_comment = array_search('-m', $argv, true);
-				$this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
+				$if_param = array_search('-m', $argv, true);
+				$this->comment_commit = ($if_param) ? $argv[++$if_param] : $this->comment_commit;
 				echo "commiting..\n";
 
 				$this->commitPrepare();
 				break;
 			case 'config':
-				$if_config = array_search('git:config', $argv, true);
-				$arg_1 = $argv[++$if_config];
-				$arg_2 = $argv[++$if_config] ?? null;
+				$this->relation_param = $this->git_param; 				// pass available params for this app module
+				$if_param = array_search('git:config', $argv, true);
+				$arg_1 = $argv[++$if_param];
+				$arg_2 = $argv[++$if_param] ?? null;
 				if ($validated = $this->getValidAppParams($arg_1, $arg_2))
 				{
 					$this->setAppParam($validated[0], $arg_2);
@@ -37,7 +52,7 @@ class Git extends Config
 				break;
 
 			default:
-				new Help($argv += [5 => '-h']);
+				callHelp::callHelp($argv);
 				break;
 		}
 	}

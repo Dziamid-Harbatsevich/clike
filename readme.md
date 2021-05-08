@@ -1,7 +1,7 @@
 # CLIke FEATURES #
 * Server Management
 * Git Add, Commit and Push (configurable from CLI)
-* Tar Backup and Copy to Storage
+* Tar Backup and Copy to Local Storage
 
 ## COMPATABILITY ##
 

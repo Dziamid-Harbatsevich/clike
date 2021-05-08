@@ -28,9 +28,12 @@ return [
 				"--branch",
 			],
 		],
-		"storage" => [
-			":source",
-			":target",
+		"store" => [
+			":config" => [
+				"-sd",
+				"-td",
+			],
+			":copy",
 		],
 	],
 ];

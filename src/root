@@ -4,3 +4,21 @@ require('core');
 require('config');
 include('server');
 include('git');
+include('storage');
+
+/**
+ * Call Help from any source.
+ */
+class callHelp
+{
+	public static function callHelp($argv)
+	{
+		array_push($argv,'-h');
+		return new Help($argv);
+	}
+	public static function callHelpExplicit($argv)
+	{
+		return new Help($argv);
+	}
+}
+
