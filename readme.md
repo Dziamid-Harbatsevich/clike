@@ -3,13 +3,11 @@
 * Git Add, Commit and Push (configurable from CLI)
 * Tar Backup and Copy to Storage
 
-- ![#1589F0](COMPATABILITY)
+## COMPATABILITY ##
 
 Developed and tested on Ubuntu 20.04(wsl) / PHP 8.0.5 / Nginx 1.18.0 / MySQL 8.0.23
 
-```diff
-+ ## INSTALLATION ##
-```
+## INSTALLATION ##
 
 ### Clone app ###
 In some \<app_folder\> defined by you. Just check if you have an appropriate rights to use this folder.
@@ -23,9 +21,7 @@ alias clike='php ~/\<app_folder\>/clike'
 ### Set PHP version running ###
 Check files: "webserver/devserv", "webserver/devserv-min"
 
-```diff
-+ ## Server Management ##
-```
+## Server Management ##
 
 ### Commands ###
 clike server:(start|stop|reload... "common parameters for Nginx, PHP, Mysql according to documentation") [--min]
@@ -43,9 +39,9 @@ clike server:start
 ```diff
 clike server:reload [--min]
 ```
-```diff
-+ ## Git Control ##
-```
+
+## Git Control ##
+
 Configure connection to the GitHub repository in .env file.
 "GIT_HOST" parameter equals a host + full path to the git repository root.
 If you wish to get total automatization than set "GIT_AUTOPASS" to true and set password. Please, consider notification below as the Git credentials send via URL-HTTPS.
@@ -77,12 +73,11 @@ clike git:config --autopass (true|false)
 
 
 
-```diff
-+ ## Credits
-```
+
+## Credits
+
 - All Contributors
 
-```diff
-+ ## License
-```
+## License
+
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
