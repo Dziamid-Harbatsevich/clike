@@ -24,26 +24,32 @@ class Storage extends Config
 		switch ($arg_1) {
 			case 'config':
 				$this->relation_param = $this->store_param; 				// pass available params for this app module
-				if ($if_param = array_search('-sd', $argv, true)) {
-					echo "source dir setting..\n";
+				if ($if_param = array_search('-sd', $argv, true))
+				{
+					$arg_1 = $argv[$if_param];
+					$arg_2 = $argv[++$if_param] ?? null;
+					if ($validated = $this->getValidAppParams($arg_1, $arg_2))
+					{
+						if ($this->setAppParam($validated[0], $arg_2)) {
+							echo "source dir set: $arg_2\n\n";
+						}
+					}
 				}
-				if ($if_param = array_search('-td', $argv, true)) {
-					echo "target dir setting..\n";
+				if ($if_param = array_search('-td', $argv, true))
+				{
+					$arg_1 = $argv[$if_param];
+					$arg_2 = $argv[++$if_param] ?? null;
+					if ($validated = $this->getValidAppParams($arg_1, $arg_2))
+					{
+						if ($this->setAppParam($validated[0], $arg_2)) {
+							echo "target dir set: $arg_2\n\n";
+						}
+					}
 				}
-
-
-					// $this->comment_commit = ($if_param) ? $argv[++$if_param] : $this->comment_commit;
-					// $this->commitPrepare();
 				break;
 			case 'copy':
-				// $if_param = array_search('td', $argv, true);
-				echo "copying dir..\n";
-					// $arg_1 = $argv[++$if_param];
-					// $arg_2 = $argv[++$if_param] ?? null;
-					// if ($validated = $this->getValidAppParams($arg_1, $arg_2))
-					// {
-					// 	$this->setAppParam($validated[0], $arg_2);
-					// }
+				$this->rCopy($this->getAppParam($this->store_param['-sd']), $this->getAppParam($this->store_param['-td']));
+				echo "Directory copied.\n\n";
 				break;
 
 			default:

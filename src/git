@@ -32,7 +32,6 @@ class Git extends Config
 	function __construct(array $argv)
 	{
 		$arg_1 = ltrim(strstr($argv[1], ':'), ':');
-
 		switch ($arg_1) {
 			case 'commit':
 				$if_param = array_search('-m', $argv, true);

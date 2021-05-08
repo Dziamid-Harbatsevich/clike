@@ -51,7 +51,8 @@ class Help
 				echo $help_header;
 				print_r($help[$this->help_topic_default]);
 			}
+
+			exit;
 		}
-		exit;
 	}
 }

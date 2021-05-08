@@ -55,4 +55,27 @@ class Core extends IO
 		  exec($cmd . " > /dev/null &");
 		}
 	}
+
+	// copies files and non-empty directories
+	protected function rCopy($src, $dst) {
+	  if (file_exists($dst)) $this->rRmDir($dst);
+	  if (is_dir($src)) {
+	    mkdir($dst);
+	    $files = scandir($src);
+	    foreach ($files as $file)
+	    if ($file != "." && $file != "..") $this->rCopy("$src/$file", "$dst/$file");
+	  }
+	  else if (file_exists($src)) copy($src, $dst);
+	}
+
+	// removes files and non-empty directories
+	protected function rRmDir($dir) {
+	  if (is_dir($dir)) {
+	    $files = scandir($dir);
+	    foreach ($files as $file)
+	    if ($file != "." && $file != "..") $this->rRmDir("$dir/$file");
+	    rmdir($dir);
+	  }
+	  else if (file_exists($dir)) unlink($dir);
+	}
 }

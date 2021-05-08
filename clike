@@ -19,6 +19,7 @@ $CSI = "\x1B[";
  * HELP
  */
 callHelp::callHelpExplicit($argv);
+($argv[1] !== null)?: callHelp::callHelp($argv);
 
 /**
  * Configuration
