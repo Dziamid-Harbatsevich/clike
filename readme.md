@@ -4,26 +4,29 @@
 * Tar Backup and Copy to Storage
 
 ```diff
-## COMPATABILITY ##
++ ## COMPATABILITY ##
 ```
 
 Developed and tested on Ubuntu 20.04(wsl) / PHP 8.0.5 / Nginx 1.18.0 / MySQL 8.0.23
 
 ```diff
-## INSTALLATION ##
++ ## INSTALLATION ##
 ```
 
 ### Clone app ###
 In some \<app_folder\> defined by you. Just check if you have an appropriate rights to use this folder.
 
 ### Create an alias for "clike" command in ~/.bash_aliases: ###
+
+```diff
 alias clike='php ~/\<app_folder\>/clike'
+```
 
 ### Set PHP version running ###
 Check files: "webserver/devserv", "webserver/devserv-min"
 
 ```diff
-## Server Management ##
++ ## Server Management ##
 ```
 
 ### Commands ###
@@ -33,14 +36,17 @@ clike server:(start|stop|reload... "common parameters for Nginx, PHP, Mysql acco
 Examples:
 * Start all servers
 
+```diff
 clike server:start
+```
 
 * Reload configurations for all servers except mysql
 
-clike server:reload [--min]
-
 ```diff
-## Git Control ##
+clike server:reload [--min]
+```
+```diff
++ ## Git Control ##
 ```
 Configure connection to the GitHub repository in .env file.
 "GIT_HOST" parameter equals a host + full path to the git repository root.
@@ -54,26 +60,31 @@ Default master branch named as "master". You can choose your own branch and gitf
 Examples:
 * Commit changes and push
 
+```diff
 clike git:commit [-m "Commit text.."]
+```
 
 * Set CLIke Git Control to use credentials for auto-authentication
 
+```diff
 clike git:config --autopass
+```
 
 * Reject CLIke Git Control to use credentials for auto-authentication
 
+```diff
 clike git:config --autopass (true|false)
-
+```
 
 
 
 
 ```diff
-## Credits
++ ## Credits
 ```
 - All Contributors
 
 ```diff
-## License
++ ## License
 ```
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
