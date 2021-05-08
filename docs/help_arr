@@ -29,8 +29,11 @@ return [
 			],
 		],
 		"store" => [
-			":source",
-			":target",
+			":config" => [
+				"-sd",
+				"-td",
+			],
+			":copy",
 		],
 	],
 ];

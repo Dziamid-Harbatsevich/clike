@@ -21,12 +21,7 @@ class Help
 			{
 				$help_topic = pathinfo($argv[0], PATHINFO_BASENAME);
 			}
-			// else {
-			// 	// $help_topic = strstr($argv[$help_topic-1], ':', true)?: $argv[1];
-			// 	echo strstr($argv[$help_topic-1], ':', true)?: $argv[1]; exit;
-
-			// 	// $help_topic = ! ? $this->help_topic_default : $help_topic; 	// if searching param for help exists
-			// }
+			else { exit; }
 
 			/**
 			 * ANSI escape code
@@ -42,11 +37,14 @@ class Help
 			if ($help_topic !== $this->help_topic_default)
 			{
 				if (!isset($help[$this->help_topic_default][$help_topic])) {
-					exit;
+					echo $help_header;
+					print_r($help[$this->help_topic_default]);
 				}
-				echo $help_header;
-				print_r($help[$this->help_topic_default][$help_topic]);
-
+				else
+				{
+					echo $help_header;
+					print_r($help[$this->help_topic_default][$help_topic]);
+				}
 			}
 			else
 			{

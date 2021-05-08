@@ -12,15 +12,7 @@ class Config extends Core
 	 * set of .env parameters.
 	 * @var [type]
 	 */
-	protected $relation_param = [
-		'--host' => 'GIT_HOST',
-		'--repo' => 'GIT_REPO',
-		'--name' => 'GIT_NAME',
-		'--pass' => 'GIT_PASS',
-		'--autopass' => 'GIT_AUTOPASS',
-		'--format' => 'GITFILE_FORMAT',
-		'--branch' => 'GIT_MAIN_BRANCH',
-	];
+	protected array $relation_param;
 
 	/**
 	 * Read parameter's value by key from .env file
