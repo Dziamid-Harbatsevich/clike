@@ -8,18 +8,22 @@
  * serv-min [(start|stop|reload... - any parameters that nginx/php-fpm accept)]
  */
 
-require('src/root');
+require(pathinfo(__FILE__, PATHINFO_DIRNAME).'/src/root');
 /**
  * ANSI escape code
  * @var string
  */
 $CSI = "\x1B[";
 
+
+// print_r(pathinfo(__FILE__, PATHINFO_DIRNAME));
+// exit;
+
 /**
  * HELP
  */
 callHelp::callHelpExplicit($argv);
-($argv[1] !== null)?: callHelp::callHelp($argv);
+(isset($argv[1]))?: callHelp::callHelp($argv);
 
 /**
  * Configuration

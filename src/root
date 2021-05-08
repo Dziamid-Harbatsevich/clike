@@ -1,10 +1,10 @@
 <?php
-include('help');
-require('core');
-require('config');
-include('server');
-include('git');
-include('storage');
+include(pathinfo(__FILE__, PATHINFO_DIRNAME).'/help');
+require(pathinfo(__FILE__, PATHINFO_DIRNAME).'/core');
+require(pathinfo(__FILE__, PATHINFO_DIRNAME).'/config');
+include(pathinfo(__FILE__, PATHINFO_DIRNAME).'/server');
+include(pathinfo(__FILE__, PATHINFO_DIRNAME).'/git');
+include(pathinfo(__FILE__, PATHINFO_DIRNAME).'/storage');
 
 /**
  * Call Help from any source.
