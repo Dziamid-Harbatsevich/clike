@@ -19,7 +19,13 @@ return [
 				"-m",
 			],
 			":config" => [
+				"--host",
+				"--repo",
+				"--name",
+				"--pass",
 				"--autopass",
+				"--format",
+				"--branch",
 			],
 		],
 		"storage" => [

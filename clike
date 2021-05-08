@@ -7,19 +7,6 @@
  * # Load nginx/php-fpm
  * serv-min [(start|stop|reload... - any parameters that nginx/php-fpm accept)]
  */
-/**
- * NOTES
- */
-/*
-Black: \u001b[30m.
-Red: \u001b[31m.
-Green: \u001b[32m.
-Yellow: \u001b[33m.
-Blue: \u001b[34m.
-Magenta: \u001b[35m.
-Cyan: \u001b[36m.
-White: \u001b[37m.
- */
 
 require('src/root');
 /**
@@ -50,16 +37,19 @@ echo "\n\n";
 
 switch (strstr($argv[1], ':', true)?: $argv[1]) {
 	case 'config':
-		# code...
+		new Help($argv);
 		break;
 	case 'server':
-		new Server($argv)?: new Help($argv += [5 => '-h']);
+		new Server($argv)?: new Help($argv);
 		break;
 	case 'git':
-		new Git($argv)?: new Help($argv += [5 => '-h']);
+		new Git($argv)?: new Help($argv);
+		break;
+	case 'storage':
+		new Help($argv);
 		break;
 
 	default:
-		// $argv[1] == null
+		new Help($argv);
 		break;
 }

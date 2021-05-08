@@ -5,25 +5,44 @@
 class Help
 {
 
-		function __construct($argv)
+	function __construct($argv)
+	{
+		$help_topic = array_search('--help', $argv, true)?: array_search('-h', $argv, true);
+		if (!empty($help_topic))
 		{
-				if ($help_topic = array_search('--help', $argv, true) || $help_topic = array_search('-h', $argv, true))
-				{
-				/**
-				 * ANSI escape code
-				 * @var string
-				 */
-					$CSI = "\x1B[";
+			if (!$help_topic && count($argv) >= 2)
+			{
+				$help_topic = strstr($argv[1], ':', true)?: $argv[1];
+			}
+			elseif (count($argv) == 1)
+			{
+				$help_topic = pathinfo($argv[0], PATHINFO_BASENAME);
+			}
+			else
+			{
+				$help_topic = strstr($argv[$help_topic-1], ':', true)?: $argv[1];
+			}
 
-					echo "\n". $CSI."32;40m" . "--------------------------------------------------------------" . $CSI . "2m" ."\n";
-					echo " -- HELP for \"". $argv[$help_topic-1]. "\" --" ."\n\n";
-					echo "Example commands: clike server:start | \nclike config:target | clike config --help" ."\n";
-					echo "--------------------------------------------------------------" ."\n\n";
+			/**
+			 * ANSI escape code
+			 * @var string
+			 */
+			$CSI = "\x1B[";
 
-					$help = include('./help_arr');
-					print_r($help);
+			echo "\n". $CSI."32;40m" . "--------------------------------------------------------------" . $CSI . "2m" ."\n";
+			echo " -- HELP for \"". $help_topic. "\" --" ."\n\n";
+			echo "Example commands: clike server:start | \nclike config:target | clike config --help" ."\n";
+			echo "--------------------------------------------------------------" ."\n\n";
 
-					exit;
-				}
+			$help = include('./docs/help_arr');
+
+			if ($help_topic !== 'clike') {
+				print_r($help['clike'][$help_topic]);
+			} else {
+				print_r($help[$help_topic]);
+			}
+
+			exit;
 		}
+	}
 }

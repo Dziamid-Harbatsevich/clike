@@ -37,7 +37,7 @@ class Git extends Config
 				break;
 
 			default:
-				echo "Help!"; // !!!!! !! !
+				new Help($argv); // !!!!! !! !
 				break;
 		}
 	}
