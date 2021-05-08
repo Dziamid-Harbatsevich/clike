@@ -16,5 +16,9 @@ class callHelp
 		array_push($argv,'-h');
 		return new Help($argv);
 	}
+	public static function callHelpExplicit($argv)
+	{
+		return new Help($argv);
+	}
 }
 
