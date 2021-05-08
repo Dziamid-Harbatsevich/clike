@@ -11,7 +11,7 @@ class Help
 		$help_topic = array_search('--help', $argv, true)?: array_search('-h', $argv, true);
 		if ($help_topic)
 		{
-			$help = include('./docs/help_arr');
+			$help = include(pathinfo(__DIR__, PATHINFO_DIRNAME).'/docs/help_arr');
 
 			if (count($argv) > 2)
 			{
