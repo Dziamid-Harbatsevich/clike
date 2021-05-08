@@ -18,10 +18,7 @@ $CSI = "\x1B[";
 /**
  * HELP
  */
-new Help($argv);
-if (!isset($argv[1])) {
-	new Help($argv += [1 => '-h']);
-}
+isset($argv[1])?: callHelp::callHelp($argv);
 
 /**
  * Configuration
@@ -37,19 +34,19 @@ echo "\n\n";
 
 switch (strstr($argv[1], ':', true)?: $argv[1]) {
 	case 'config':
-		new Help($argv += [5 => '-h']);
+		callHelp::callHelp($argv);
 		break;
 	case 'server':
-		new Server($argv)?: new Help($argv += [5 => '-h']);
+		new Server($argv)?: callHelp::callHelp($argv);
 		break;
 	case 'git':
-		new Git($argv)?: new Help($argv += [5 => '-h']);
+		new Git($argv)?: callHelp::callHelp($argv);
 		break;
 	case 'store':
-		new Help($argv += [5 => '-h']);
+		new Storage($argv)?: callHelp::callHelp($argv);
 		break;
 
 	default:
-		new Help($argv += [5 => '-h']);
+		callHelp::callHelp($argv);
 		break;
 }

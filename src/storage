@@ -14,4 +14,36 @@ class Storage extends Config
 		'-td' => 'STORAGE_TARGET_DIR',
 	];
 
+	/**
+	 * Parse CLI parameters.
+	 * @param array $argv CLIke CLI params array
+	 */
+	function __construct(array $argv)
+	{
+		$arg_1 = ltrim(strstr($argv[1], ':'), ':');
+		echo "Hello from Storage..\n";
+		switch ($arg_1) {
+			case 'source':
+				$if_comment = array_search('-sd', $argv, true);
+				echo "source dir setting..\n";
+					// $this->comment_commit = ($if_comment) ? $argv[++$if_comment] : $this->comment_commit;
+					// $this->commitPrepare();
+				break;
+			case 'target':
+				$if_config = array_search('td', $argv, true);
+				echo "target dir setting..\n";
+					// $arg_1 = $argv[++$if_config];
+					// $arg_2 = $argv[++$if_config] ?? null;
+					// if ($validated = $this->getValidAppParams($arg_1, $arg_2))
+					// {
+					// 	$this->setAppParam($validated[0], $arg_2);
+					// }
+				break;
+
+			default:
+				new Help(array_push($argv,'-h'));
+				break;
+		}
+		callHelp::callHelp($argv);
+	}
 }

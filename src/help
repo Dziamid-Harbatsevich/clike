@@ -7,6 +7,7 @@ class Help
 
 	function __construct($argv)
 	{
+		print_r($argv);
 		$help_topic = array_search('--help', $argv, true)?: array_search('-h', $argv, true);
 		if (!empty($help_topic))
 		{
@@ -23,6 +24,11 @@ class Help
 				$help_topic = strstr($argv[$help_topic-1], ':', true)?: $argv[1];
 			}
 
+			$help = include('./docs/help_arr');
+			// if searching param for help does not exist
+			// if (!array_search($help_topic, $help['clike'], true))
+			// { exit; }
+
 			/**
 			 * ANSI escape code
 			 * @var string
@@ -34,11 +40,12 @@ class Help
 			echo "Example commands: clike server:start | \nclike config:target | clike config --help" ."\n";
 			echo "--------------------------------------------------------------" ."\n\n";
 
-			$help = include('./docs/help_arr');
-
-			if ($help_topic !== 'clike') {
+			if ($help_topic !== 'clike')
+			{
 				print_r($help['clike'][$help_topic]);
-			} else {
+			}
+			else
+			{
 				print_r($help[$help_topic]);
 			}
 
