@@ -20,5 +20,6 @@ class Server extends Core
 			$cmd = 'sh '.pathinfo($argv[0], PATHINFO_DIRNAME).'/webserver/devserv-min ' . $param_1;
 			$this->execInBackground($cmd);
 		}
+		sleep(7);
 	}
 }
