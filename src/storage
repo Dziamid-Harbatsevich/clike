@@ -1,0 +1,17 @@
+<?php
+/**
+ * App Configuration
+ */
+class Storage extends Config
+{
+	/**
+	 * Parameters available. Use this array to validate or to choose from
+	 * set of .env parameters.
+	 * @var [type]
+	 */
+	protected $relation_param = [
+		'-sd' => 'STORAGE_SOURCE_DIR',
+		'-td' => 'STORAGE_TARGET_DIR',
+	];
+
+}

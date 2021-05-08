@@ -45,7 +45,7 @@ switch (strstr($argv[1], ':', true)?: $argv[1]) {
 	case 'git':
 		new Git($argv)?: new Help($argv += [5 => '-h']);
 		break;
-	case 'storage':
+	case 'store':
 		new Help($argv += [5 => '-h']);
 		break;
 

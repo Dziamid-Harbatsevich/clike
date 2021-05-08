@@ -4,3 +4,4 @@ require('core');
 require('config');
 include('server');
 include('git');
+include('storage');

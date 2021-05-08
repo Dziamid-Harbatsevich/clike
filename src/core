@@ -12,15 +12,21 @@ class Core extends IO
 	protected $env_file = '.env';
 
 	/**
-	 * [readFileToArr description]
-	 * @return [type]       [description]
+	 * Get file content and explode it to array by lines ignoring empty lines
+	 * @return array       [numeric keys => lines from .env file]
 	 */
-	protected function readFileToArr()
+	protected function readFileToArr(): array
 	{
 		return file($this->env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 	}
 
-	protected static function validateParam(array $validated, array $rules)
+	/**
+	 * Check if params of the CLI command exists for current controller.
+	 * @param  array  $validated 	[param name => new value]
+	 * @param  array  $rules     	[param name => .env keys]
+	 * @return array            	[param name => new value] if param exists for current controller
+	 */
+	protected static function validateParam(array $validated, array $rules): array
 	{
 		return array_intersect($validated, $rules);
 	}

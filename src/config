@@ -22,7 +22,12 @@ class Config extends Core
 		'--branch' => 'GIT_MAIN_BRANCH',
 	];
 
-	protected function getAppParam($app_param)
+	/**
+	 * Read parameter's value by key from .env file
+	 * @param  string 		$app_param 	param key
+	 * @return string|bool            	param value | param does not exist
+	 */
+	protected function getAppParam(string $app_param)
 	{
 		$this->app_param_all = $this->readFileToArr();
 
@@ -36,7 +41,13 @@ class Config extends Core
 		return false;
 	}
 
-	protected function setAppParam($arg_key, $arg_value = null)
+	/**
+	 * Rewrite parameter's value by key from .env file
+	 * @param 	string 		$arg_key   	param key
+	 * @param 	string|null $arg_value 	param value | delete param value
+	 * @return 	bool|null            	if param saved | can not read param
+	 */
+	protected function setAppParam(string $arg_key, $arg_value = null)
 	{
 		if ($this->getAppParam($this->relation_param[$arg_key]) !== false)
 		{
@@ -54,14 +65,25 @@ class Config extends Core
 		 	$this->app_param_all[$position] = $app_param_new;
 			return $this->saveAppParameters() ? true : false;
 		}
+		return;
 	}
 
-	protected function getValidAppParams($arg_key, $arg_value = null)
+	/**
+	 * Prepare array of new data for validation.
+	 * @param  string 		$arg_key   	param key
+	 * @param  string|null 	$arg_value 	param value | delete param value
+	 * @return array 					user's params for validation
+	 */
+	protected function getValidAppParams($arg_key, $arg_value = null): array
 	{
 		return $this->parameters = $this->validateParam($this->prepToValidate([$arg_key, $arg_value]), array_keys($this->relation_param));
 	}
 
-	protected function saveAppParameters()
+	/**
+	 * Rewrite all .env data to .env file. Delete previous data.
+	 * @return bool [description]
+	 */
+	protected function saveAppParameters(): bool
 	{
 		$file_data = implode("\n", $this->app_param_all);
 		$fl = fopen('.env', 'a');

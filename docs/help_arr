@@ -28,7 +28,7 @@ return [
 				"--branch",
 			],
 		],
-		"storage" => [
+		"store" => [
 			":source",
 			":target",
 		],
