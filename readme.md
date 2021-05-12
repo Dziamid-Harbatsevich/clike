@@ -7,6 +7,9 @@
 
 Developed and tested on Ubuntu 20.04(wsl) / PHP 8.0.5 / Nginx 1.18.0 / MySQL 8.0.23
 
+Requirements:
+- PHP ^8.0
+
 ## INSTALLATION ##
 
 ### Clone app ###
