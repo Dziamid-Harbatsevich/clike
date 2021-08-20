@@ -1,3 +1,5 @@
+![A+ CODE QUALITY Codefactor.io](https://www.codefactor.io/Content/badges/APlus.svg)
+
 # CLIke FEATURES #
 * Server Management
 * Git Add, Commit and Push (configurable from CLI)
